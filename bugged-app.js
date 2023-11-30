@@ -20,26 +20,39 @@ try {
 
 
 const movingBlock = document.getElementById('movingBlock');
-let movingUp = true;
+let movingUp = false;
+let movingDown = false;
 
 function moveBlock() {
     const currentPosition = movingBlock.offsetTop;
 
-    if (movingUp) {
-        if (currentPosition > 0) {
-            movingBlock.style.top = currentPosition - 2 + 'px';
-        } else {
-            movingUp = false;
-        }
-    } else {
-        if (currentPosition < window.innerHeight - movingBlock.offsetHeight) {
-            movingBlock.style.top = currentPosition + 2 + 'px';
-        } else {
-            movingUp = true;
-        }
+    if (movingUp && currentPosition > 0) {
+        movingBlock.style.top = currentPosition - 2 + 'px';
     }
 
-    movingUp = !movingUp;
+    if (movingDown && currentPosition < window.innerHeight - movingBlock.offsetHeight) {
+        if ((Math.random() > 0.5 && currentPosition > window.innerHeight / 2) || currentPosition < window.innerHeight / 4) {
+            movingBlock.style.top = currentPosition + 2 + 'px';
+        } else {
+            movingBlock.style.top = currentPosition - 2 + 'px';
+        }
+    }
 }
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowUp') {
+        movingUp = true;
+    } else if (event.key === 'ArrowDown') {
+        movingDown = true;
+    }
+});
+
+document.addEventListener('keyup', (event) => {
+    if (event.key === 'ArrowUp') {
+        movingUp = false;
+    } else if (event.key === 'ArrowDown') {
+        movingDown = false;
+    }
+});
 
 setInterval(moveBlock, 30);
