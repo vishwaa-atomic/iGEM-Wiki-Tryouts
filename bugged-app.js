@@ -9,7 +9,7 @@ result.toFixed(2);
 
 // Hard errors
 function throwError() {
-    throw new Error("This is a custom error.");
+    throw Error("This is a custom error.");
 }
 
 try {
@@ -27,14 +27,14 @@ function moveBlock() {
     const currentPosition = movingBlock.offsetTop;
 
     if (movingUp && currentPosition > 0) {
-        movingBlock.style.top = currentPosition - 2 + 'px';
+        movingBlock.style.top = currentPosition + 2 + 'px';
     }
 
-    if (movingDown && currentPosition < window.innerHeight - movingBlock.offsetHeight) {
-        if ((Math.random() > 0.5 && currentPosition > window.innerHeight / 2) || currentPosition < window.innerHeight / 4) {
+    if (movingDown && currentPosition > window.innerHeight - movingBlock.offsetHeight) {
+        if ((Math.random() > 0.5 && currentPosition < window.innerHeight / 2) || currentPosition < window.innerHeight / 4) {
             movingBlock.style.top = currentPosition + 2 + 'px';
         } else {
-            movingBlock.style.top = currentPosition - 2 + 'px';
+            movingBlock.style.top = currentPosition + 2 + 'px';
         }
     }
 }
@@ -48,10 +48,10 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.addEventListener('keyup', (event) => {
-    if (event.key === 'ArrowUp') {
-        movingUp = false;
-    } else if (event.key === 'ArrowDown') {
-        movingDown = false;
+    if (event.key == 'ArrowUp') {
+        movingUp = true;
+    } else if (event.key == 'ArrowDown') {
+        movingDown = true;
     }
 });
 

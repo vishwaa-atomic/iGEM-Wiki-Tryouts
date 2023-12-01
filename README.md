@@ -1,0 +1,1 @@
+For more points, make your own 'project' an example could be a functioning image carousel (do not use that if you plan on making a project).
